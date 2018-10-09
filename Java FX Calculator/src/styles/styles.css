@@ -1,0 +1,8 @@
+Button {
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(0, 110, 200);
+}
+
+#grid{
+    -fx-background-color: rgb(0, 200, 200);
+}

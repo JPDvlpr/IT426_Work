@@ -1,5 +1,6 @@
 package ui;
 
+import calculator.CalculatorController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -19,11 +20,11 @@ import javafx.stage.Stage;
  */
 public class CalculatorUI extends Application {
     public static final int NUM_COLS = 4;
-    public static final int NUM_BOXES = 3;
     public static final int COL_WIDTH = 40;
     public static final int WIN_WIDTH = COL_WIDTH * 7;
     public static final int WIN_HEIGHT = COL_WIDTH * 7;
     private static final double BUTTON_WIDTH = 32;
+    CalculatorController controller = new CalculatorController();
 
     @Override
     public void start(Stage stage) {
@@ -44,6 +45,7 @@ public class CalculatorUI extends Application {
         //set some spacing
         grid.setHgap(10);
         grid.setVgap(10);
+
         //grid.setGridLinesVisible(true);
         grid.setPadding(new Insets(10));
 
@@ -54,17 +56,13 @@ public class CalculatorUI extends Application {
             cols.add(new ColumnConstraints(COL_WIDTH));
         }
 
-        //then add a text area with row and col span
-        HBox area = new HBox(3);
-        grid.add(area, 0, 0, 3, 1);
-
         TextArea total = new TextArea();
         total.setMaxHeight(BUTTON_WIDTH);
 
         Button[] buttons = {new Button("7"), new Button("8"), new Button("9"),
                 new Button("+"), new Button("4"), new Button("5"), new Button("6"),
                 new Button("-"), new Button("1"), new Button("2"), new Button("3"),
-                new Button("*"), new Button("0"), new Button("Enter"), new Button("/")};
+                new Button("*"), new Button("0"), new Button("Enter"), new Button("/"), new Button("C")};
 
         int counter = 0;
 
@@ -72,6 +70,12 @@ public class CalculatorUI extends Application {
 
             int columns = i % NUM_COLS;
             int rows = i / NUM_COLS;
+
+            String text = buttons[i].getText();
+            buttons[i].setOnAction(event -> {
+                controller.calcInput(text);
+                total.setText(controller.showResult());
+            });
 
             if (buttons[i].getText().equals("Enter")) {
                 grid.add(buttons[i], columns, rows, 2, 1);

@@ -5,6 +5,8 @@ import java.text.DecimalFormat;
 /**
  * Model class takes the workload and the functionality to be passed
  * to the controller
+ * @author Jhakon Pappoe
+ * @version 1.0
  */
 public class CalculatorModel {
     private static final int ZERO = 0;
@@ -12,15 +14,15 @@ public class CalculatorModel {
     private String currentCalcInput;
     private String operators = "+ - * / Enter C";
     private String operatorInput = "";
-    DecimalFormat df = new DecimalFormat("#.00");
+    private DecimalFormat decimalFormat = new DecimalFormat("#.00");
 
     /**
      * takes first number, second, and an operator of add, sub, mult, div
      *
-     * @param calcNumb1
-     * @param calcNumb2
-     * @param operator
-     * @return
+     * @param calcNumb1 first number
+     * @param calcNumb2 second number
+     * @param operator operation for first and second number
+     * @return return the operation
      */
     public long calculate(long calcNumb1, long calcNumb2, String operator) {
         switch (operator) {
@@ -31,8 +33,9 @@ public class CalculatorModel {
             case "*":
                 return calcNumb1 * calcNumb2;
             case "/":
-                if (calcNumb2 == ZERO)
+                if (calcNumb2 == ZERO) {
                     return ZERO;
+                }
                 return calcNumb1 / calcNumb2;
             default:
                 return ZERO;
@@ -42,21 +45,20 @@ public class CalculatorModel {
     /**
      * main functionality of the calculator
      *
-     * @param input
+     * @param input user input for the calculator
      */
     public void calcInput(String input) {
 
-        if (input == "C") {
+        if (input.equals("C")) {
             currentCalcInput = "";
             savedCalcInput = "";
             operatorInput = "";
-            input = "";
         } else if (operators.contains(input)) {
-            if (operatorInput == "") {
+            if (operatorInput.equals("")) {
                 operatorInput = input;
                 savedCalcInput = currentCalcInput;
                 currentCalcInput = "";
-            } else if (operatorInput == "Enter") {
+            } else if (operatorInput.equals("Enter")) {
                 operatorInput = input;
                 currentCalcInput = "";
             } else {
@@ -73,14 +75,25 @@ public class CalculatorModel {
     }
 
     /**
-     * Returns the calculated input
      *
-     * @return
+     *
+     * @return Returns the calculated input
      */
     public String showResult() {
-        if (operatorInput == "Enter") {
+        if (operatorInput.equals("Enter")) {
             return savedCalcInput;
         }
         return currentCalcInput;
+    }
+
+    @Override
+    public String toString() {
+        return "CalculatorModel{" +
+                "savedCalcInput='" + savedCalcInput + '\'' +
+                ", currentCalcInput='" + currentCalcInput + '\'' +
+                ", operators='" + operators + '\'' +
+                ", operatorInput='" + operatorInput + '\'' +
+                ", decimalFormat=" + decimalFormat +
+                '}';
     }
 }

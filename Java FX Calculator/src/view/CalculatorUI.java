@@ -1,4 +1,4 @@
-package ui;
+package view;
 
 import calculator.CalculatorController;
 import javafx.application.Application;
@@ -30,11 +30,13 @@ public class CalculatorUI extends Application {
     private static final int WIN_HEIGHT = COL_WIDTH * 7;
     private static final double BUTTON_WIDTH = 40;
     private static final int BUTTON_PADDING = 10;
-    CalculatorController controller = new CalculatorController();
+    private CalculatorController controller = new CalculatorController();
+    private GridPane grid = new GridPane();
+
 
     /**
      * starts the stage, sets title, adds stylesheet
-     * @param stage
+     * @param stage sets the title of the program and displays the scene
      */
     @Override
     public void start(Stage stage) {
@@ -45,39 +47,34 @@ public class CalculatorUI extends Application {
         stage.show();
     }
 
-    private Scene getScene() {
-        GridPane grid = new GridPane();
+    private void gridLayout(){
         grid.setAlignment(Pos.CENTER);
         grid.setId("grid");
         grid.setHgap(BUTTON_PADDING);
         grid.setVgap(BUTTON_PADDING);
         grid.setPadding(new Insets(BUTTON_PADDING));
+    }
 
+    private Scene getScene() {
+        gridLayout();
         ObservableList<ColumnConstraints> cols = grid.getColumnConstraints();
-
         for (int i = 1; i <= NUM_COLS; i++) {
             cols.add(new ColumnConstraints(COL_WIDTH));
         }
-
         TextArea total = new TextArea();
         total.setMaxHeight(BUTTON_WIDTH);
-
         Button[] buttons = {new Button("7"), new Button("8"), new Button("9"),
                 new Button("+"), new Button("4"), new Button("5"), new Button("6"),
                 new Button("-"), new Button("1"), new Button("2"), new Button("3"),
                 new Button("*"), new Button("0"), new Button("Enter"), new Button("/"), new Button("C")};
-
         int counter = ZERO;
-
         for (int i = ZERO; i < buttons.length; i++) {
-
             int columns = i % NUM_COLS;
             int rows = i / NUM_COLS;
-
             String text = buttons[i].getText();
             buttons[i].setOnAction(event -> {
-                controller.calcInput(text);
-                total.setText(controller.showResult());
+                getController().calcInput(text);
+                total.setText(getController().showResult());
             });
 
             if (buttons[i].getText().equals("Enter")) {
@@ -93,5 +90,16 @@ public class CalculatorUI extends Application {
         grid.add(total, ZERO, ROW_INDEX, NUM_COLS, ROWSPAN);
 
         return new Scene(grid, WIN_WIDTH, WIN_HEIGHT);
+    }
+
+    @Override
+    public String toString() {
+        return "CalculatorUI{" +
+                "controller=" + getController() +
+                '}';
+    }
+
+    private CalculatorController getController() {
+        return controller;
     }
 }

@@ -3,7 +3,6 @@ package calculator;
 import model.CalculatorModel;
 
 public class CalculatorController {
-
     private CalculatorModel model = new CalculatorModel();
 
     public void calcInput(String input) {

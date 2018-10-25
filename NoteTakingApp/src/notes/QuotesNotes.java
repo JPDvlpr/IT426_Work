@@ -1,5 +1,6 @@
 package notes;
 
+import controller.NoteAppController;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -22,10 +23,11 @@ public class QuotesNotes extends Application {
     private final int COL_WIDTH = 40;
     private final int ROW_INDEX = 0;
     private final int ROWSPAN = 1;
-    private final int WIN_WIDTH = COL_WIDTH * 15;
-    private final int WIN_HEIGHT = COL_WIDTH * 15;
+    private final int WIN_WIDTH = COL_WIDTH * 12;
+    private final int WIN_HEIGHT = COL_WIDTH * 12;
     private final double BUTTON_WIDTH = 40;
     private final int BUTTON_PADDING = 10;
+    private NoteAppController controller = new NoteAppController();
 
     public void start(Stage stage){
         note.start(stage);
@@ -63,6 +65,13 @@ public class QuotesNotes extends Application {
         post.setMaxHeight(BUTTON_WIDTH);
         post.setId("post");
 
+
+
+        post.setOnAction(event -> {
+            controller.handleNewQuote(quote.getText(), author.getText());
+            //addColor(new ColorPair(nameEntry.getText(), colorEntry.getValue()));
+        });
+
         grid.add(quote, 0, ROW_INDEX, NUM_COLS, ROWSPAN);
 
         grid.add(author, 0, 1, NUM_COLS, ROWSPAN);
@@ -70,5 +79,18 @@ public class QuotesNotes extends Application {
         grid.add(post, 0, 2, NUM_COLS, ROWSPAN);
 
         return new Scene(grid, WIN_WIDTH, WIN_HEIGHT);
+    }
+
+    private void addQuote(String newQuote)
+    {
+        Text text = new Text();
+        text.setText(newQuote);
+        //text.setFill(newQuote.getColor());
+
+        //add a tooltip with the name
+//        Tooltip tip = new Tooltip(pair.getName());
+//        Tooltip.install(square, tip);
+//
+//        colorsPanel.getChildren().add(square);
     }
 }

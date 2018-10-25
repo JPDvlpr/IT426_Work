@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
-public class QuotesNotes extends Application {
+public class QuotesNotes extends MenuUI {
 
     private Notes note = new Notes();
     public GridPane grid = new GridPane();

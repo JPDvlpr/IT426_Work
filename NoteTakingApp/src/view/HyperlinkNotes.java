@@ -1,5 +1,6 @@
 package view;
 
+import controller.NoteAppController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,6 +24,8 @@ public class HyperlinkNotes extends Application
     private final int WIN_HEIGHT = COL_WIDTH * 12;
     private final double BUTTON_WIDTH = 40;
     private final int BUTTON_PADDING = 10;
+    private NoteAppController controller = new NoteAppController();
+
 
     public void start(Stage stage){
         note.start(stage);
@@ -68,6 +71,10 @@ public class HyperlinkNotes extends Application
         Button post = new Button("Post");
         post.setMaxHeight(BUTTON_WIDTH);
         post.setId("post");
+
+        post.setOnAction(event -> {
+            controller.handleNewNote("quote", hyperlinkName.getText(), hyperlink.getText());
+        });
 
         grid.add(hyperlinkName, 0, ROW_INDEX, NUM_COLS, ROWSPAN);
 

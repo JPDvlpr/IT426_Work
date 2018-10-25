@@ -22,6 +22,30 @@ public class NoteAppController {
                 model.addQuote(body, other);
                 return true;
         }
+        switch (type){
+            case "hyperlink":
+                if (isEmpty(body) || isEmpty(other)) {
+                    return false;
+                }
+                model.addQuote(body, other);
+                return true;
+        }
+        switch (type){
+            case "codesnippet":
+                if (isEmpty(body) || isEmpty(other)) {
+                    return false;
+                }
+                model.addQuote(body, other);
+                return true;
+        }
+        switch (type){
+            case "todo":
+                if (isEmpty(body) || isEmpty(other)) {
+                    return false;
+                }
+                model.addQuote(body, other);
+                return true;
+        }
         return false;
     }
 

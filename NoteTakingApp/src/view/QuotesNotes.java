@@ -62,8 +62,7 @@ public class QuotesNotes extends Application {
         post.setId("post");
 
         post.setOnAction(event -> {
-            controller.handleNewNote("quote",quote.getText(), author.getText());
-            //addQuoteToDB(quote.getText(), author.getText());
+            controller.handleNewNote("quote", quote.getText(), author.getText());
         });
 
         grid.add(quote, 0, ROW_INDEX, NUM_COLS, ROWSPAN);
@@ -73,32 +72,5 @@ public class QuotesNotes extends Application {
         grid.add(post, 0, 2, NUM_COLS, ROWSPAN);
 
         return new Scene(grid, WIN_WIDTH, WIN_HEIGHT);
-    }
-
-
-    private void addQuoteToDB(String quote, String author) {
-//        if (isEmpty()) {
-//
-//        } else {
-//            DBNotes db = new DBNotes();
-//            db.addQuote(quote, author);
-//        }
-    }
-
-    private boolean isEmpty(String value) {
-        return value == null || value.equals("");
-    }
-
-    private void addQuote(String quote, String author) {
-        Text text = new Text();
-        text.setText(quote);
-        text.setText(author);
-        //text.setFill(newQuote.getColor());
-
-        //add a tooltip with the name
-//        Tooltip tip = new Tooltip(pair.getName());
-//        Tooltip.install(square, tip);
-//
-//        colorsPanel.getChildren().add(square);
     }
 }

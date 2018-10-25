@@ -1,4 +1,4 @@
-package noteViews;
+package view;
 
 public class CodeNotes
 {

@@ -1,4 +1,4 @@
-package noteViews;
+package view;
 
 import controller.NoteAppController;
 import javafx.application.Application;
@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
-import model.DBNotes;
 
 public class QuotesNotes extends Application {
 

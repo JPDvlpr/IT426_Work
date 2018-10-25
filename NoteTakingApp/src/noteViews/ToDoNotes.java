@@ -1,4 +1,4 @@
-package notes;
+package noteViews;
 
 public class ToDoNotes
 {

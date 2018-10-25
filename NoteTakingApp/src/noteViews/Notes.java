@@ -1,4 +1,4 @@
-package notes;
+package noteViews;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -8,8 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.awt.*;
 
 public class Notes extends Application {
 

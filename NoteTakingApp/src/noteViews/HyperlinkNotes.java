@@ -1,22 +1,18 @@
-package notes;
+package noteViews;
 
-import controller.NoteAppController;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 
-public class QuotesNotes extends Application {
-
+public class HyperlinkNotes extends Application
+{
     private Notes note = new Notes();
     public GridPane grid = new GridPane();
     private final int NUM_COLS = 4;
@@ -27,7 +23,6 @@ public class QuotesNotes extends Application {
     private final int WIN_HEIGHT = COL_WIDTH * 12;
     private final double BUTTON_WIDTH = 40;
     private final int BUTTON_PADDING = 10;
-    private NoteAppController controller = new NoteAppController();
 
     public void start(Stage stage){
         note.start(stage);
@@ -35,14 +30,14 @@ public class QuotesNotes extends Application {
         scene.getStylesheets().add("styles/styles.css");
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("Quote Note");
+        stage.setTitle("Hyperlink Note");
     }
 
     public void gridLayout(){
         note.gridLayout();
         grid.setAlignment(Pos.CENTER);
         //grid.setGridLinesVisible(true);
-        grid.setId("grid");
+        grid.setId("hyperlink-grid");
         grid.setHgap(BUTTON_PADDING);
         grid.setVgap(BUTTON_PADDING);
         grid.setPadding(new Insets(BUTTON_PADDING));
@@ -52,45 +47,34 @@ public class QuotesNotes extends Application {
 
         gridLayout();
 
-        TextField quote = new TextField();
-        quote.setFont(Font.font("Helvetica", FontPosture.ITALIC, 14));
-        quote.setMaxHeight(BUTTON_WIDTH);
-        quote.setId("quote");
+        TextField hyperlinkName = new TextField();
+        hyperlinkName.setFont(Font.font("Helvetica", FontPosture.ITALIC, 14));
+        hyperlinkName.setMaxHeight(BUTTON_WIDTH);
+        hyperlinkName.setId("hyperlink-name");
 
-        TextField author = new TextField();
-        author.setMaxHeight(BUTTON_WIDTH);
-        author.setId("author");
+        hyperlinkName.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Name: " + newValue);
+        });
+
+        TextField hyperlink = new TextField();
+        hyperlink.setFont(Font.font("Helvetica", FontPosture.ITALIC, 14));
+        hyperlink.setMaxHeight(BUTTON_WIDTH);
+        hyperlink.setId("hyperlink");
+
+        hyperlink.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Hyperlink: " + newValue);
+        });
 
         Button post = new Button("Post");
         post.setMaxHeight(BUTTON_WIDTH);
         post.setId("post");
 
+        grid.add(hyperlinkName, 0, ROW_INDEX, NUM_COLS, ROWSPAN);
 
-
-        post.setOnAction(event -> {
-            controller.handleNewQuote(quote.getText(), author.getText());
-            //addColor(new ColorPair(nameEntry.getText(), colorEntry.getValue()));
-        });
-
-        grid.add(quote, 0, ROW_INDEX, NUM_COLS, ROWSPAN);
-
-        grid.add(author, 0, 1, NUM_COLS, ROWSPAN);
+        grid.add(hyperlink, 0, 1, NUM_COLS, ROWSPAN);
 
         grid.add(post, 0, 2, NUM_COLS, ROWSPAN);
 
         return new Scene(grid, WIN_WIDTH, WIN_HEIGHT);
-    }
-
-    private void addQuote(String newQuote)
-    {
-        Text text = new Text();
-        text.setText(newQuote);
-        //text.setFill(newQuote.getColor());
-
-        //add a tooltip with the name
-//        Tooltip tip = new Tooltip(pair.getName());
-//        Tooltip.install(square, tip);
-//
-//        colorsPanel.getChildren().add(square);
     }
 }

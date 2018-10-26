@@ -22,14 +22,14 @@ public class DBNotes implements INotesData {
     }
 
     @Override
-    public void addQuote(String quote, String author) {
+    public void addNotes(String tableName, String body, String other) {
         try {
             Statement stmt = conn.createStatement();
 
             //execute() is for insert, update or delete
-            String newQuote = "INSERT INTO quotes VALUES (null,'" +
-                    quote + "', '" +
-                    author + "')";
+            String newQuote = "INSERT INTO " + tableName + " VALUES (null,'" +
+                    body + "', '" +
+                    other + "')";
             System.out.println(newQuote);
             stmt.execute(newQuote);
         } catch (SQLException e) {

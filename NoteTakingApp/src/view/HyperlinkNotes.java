@@ -73,7 +73,7 @@ public class HyperlinkNotes extends Application
         post.setId("post");
 
         post.setOnAction(event -> {
-            controller.handleNewNote("quote", hyperlinkName.getText(), hyperlink.getText());
+            controller.handleNewNote("hyperlink", hyperlinkName.getText(), hyperlink.getText());
         });
 
         grid.add(hyperlinkName, 0, ROW_INDEX, NUM_COLS, ROWSPAN);

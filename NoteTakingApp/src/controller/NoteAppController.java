@@ -14,36 +14,36 @@ public class NoteAppController {
     }
 
     public boolean handleNewNote(String type, String body, String other) {
-        switch (type){
+        switch (type) {
             case "quote":
                 if (isEmpty(body) || isEmpty(other)) {
                     return false;
                 }
-                model.addQuote(body, other);
+                model.addNotes("quotes", body, other);
                 return true;
         }
-        switch (type){
+        switch (type) {
             case "hyperlink":
                 if (isEmpty(body) || isEmpty(other)) {
                     return false;
                 }
-                model.addQuote(body, other);
+                model.addNotes("hyperlinks", body, other);
                 return true;
         }
-        switch (type){
+        switch (type) {
             case "codesnippet":
                 if (isEmpty(body) || isEmpty(other)) {
                     return false;
                 }
-                model.addQuote(body, other);
+                model.addNotes("codesnippets", body, other);
                 return true;
         }
-        switch (type){
+        switch (type) {
             case "todo":
                 if (isEmpty(body) || isEmpty(other)) {
                     return false;
                 }
-                model.addQuote(body, other);
+                model.addNotes("todos", body, other);
                 return true;
         }
         return false;

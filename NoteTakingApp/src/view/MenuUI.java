@@ -1,20 +1,26 @@
 package view;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import static javafx.geometry.Pos.BOTTOM_RIGHT;
 
 
 public class MenuUI extends Application
 {
+    public static final int WIN_SIZE = 300;
+    public static final int DELAY = 3000;
     private static final int NUM_COLS = 10;
     private static final int INT1 = 15;
     private static final int INT2 = 15;
@@ -30,8 +36,14 @@ public class MenuUI extends Application
     private static final int HEIGHT = 500;
     private Label label;
     private HBox area;
-    
-    Stage primaryStage;
+    private Stage primaryStage;
+    private String[] headers = {"Quotes", "Hyperlink", "todolist", "codesnippets"};
+    private String[] bodies = {
+            "quotes",
+            "links",
+            "todolist",
+            "Codesnips"
+    };
     
     @Override
     public void start(Stage primaryStage) throws Exception
@@ -40,6 +52,22 @@ public class MenuUI extends Application
         primaryStage.setScene(getIntroScene());
         primaryStage.show( );
         this.primaryStage = primaryStage;
+    
+        KeyFrame frame = new KeyFrame( Duration.millis(DELAY),
+                event -> primaryStage.setScene(getStoryScreen(0)));
+        Timeline animation = new Timeline(frame);
+        animation.play();
+    }
+    
+    
+    private Scene getStoryScreen(int i)
+    {
+    //ADDED THIS METHOD AFTER KEYFRAME EVENT HANDLER ADDED TO START METHOD. NEEDS WORK,
+        VBox panel = new VBox();
+        Node elements = null;
+        panel.getChildren().addAll(elements);
+    
+        return new Scene(panel, WIN_SIZE, WIN_SIZE);
     }
     
     private Scene getIntroScene()
@@ -48,19 +76,19 @@ public class MenuUI extends Application
         //panel.getChildren( ).addAll(buttons( ));
         panel.getChildren().addAll(getNotesButtons());
         Scene scene = new Scene(panel,WIDTH,HEIGHT);
+        
         return scene;
     }
     
     private Scene getNoteScene()
     {
         HBox panel = new HBox( );
-        //panel.getChildren( ).addAll(buttons( ));
-//        panel.getChildren().addAll(getNotesButtons());
+        panel.getChildren( ).addAll(buttons( ));
+        panel.getChildren().addAll(getNotesButtons());
         Scene scene = new Scene(panel,WIDTH,HEIGHT);
         
         return scene;
     }
-    
     
     
     
@@ -71,13 +99,13 @@ public class MenuUI extends Application
         Button[] buttons = {new Button("Quote"), new Button("todo"), new Button("CodeSnippets"), new Button("Hyperlink")};
         
         String[] buttonNames = {new String("quotenotes"), new String("codesnippetnotes"), new String("todonotes"), new String("hyperlinknotes")};
+//        for (int i = 0; i < integer; i++)
+//        {
+//            notesButton[i] = new Button(buttonNames[i]);
+//        }
+
+//        char integer1 = 0;
         for (int i = 0; i < integer; i++)
-        {
-            notesButton[i] = new Button(buttonNames[i]);
-        }
-        
-        char integer1 = 0;
-        for (int i = 0; i < integer1; i++)
         {
             String name = buttonNames[i];
             notesButton[i].setOnAction(event ->
@@ -108,4 +136,5 @@ public class MenuUI extends Application
         grid.add(area,0,5,NUM_COLS,1);
         return grid;
     }
+    
 }

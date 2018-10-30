@@ -27,14 +27,62 @@ public class DBNotes implements INotesData {
             Statement stmt = conn.createStatement();
 
             //execute() is for insert, update or delete
-            String newQuote = "INSERT INTO " + tableName + " VALUES (null,'" +
-                    body + "', '" +
-                    other + "')";
+            String newQuote = "INSERT INTO " + tableName + " VALUES (null,'" + body + "'";
+            if (!tableName.equals("todos")) {
+                newQuote += ", '" + other + "'";
+            }
+            newQuote += ")";
+            System.out.println("body: " + body + "other: " + other);
+            if (tableName == "todos") {
+                String insertItem = "INSERT INTO " + "todoitems" + " VALUES (null, false,'" +
+                        other + ", null";
+            }
             System.out.println(newQuote);
             stmt.execute(newQuote);
+            if (tableName.equals("todos")){
+                addToDo(body,other);
+            }
         } catch (SQLException e) {
             throw new IllegalStateException(
                     "Error inserting quote: " + e.getMessage());
         }
+    }
+
+    public void addToDo(String title, String todo){
+        try {
+            Statement stmt = conn.createStatement();
+
+        String newToDo = "INSERT INTO " + "todos" + " VALUES (null,'" + title + "'";
+        String getTitle = "SELECT id FROM todos WHERE title = " + title;
+        System.out.println(newToDo);
+            System.out.println(getTitle);
+        stmt.execute(newToDo);
+    } catch (SQLException e) {
+        throw new IllegalStateException(
+                "Error inserting quote: " + e.getMessage());
+    }
+}
+
+    public void addToDoItems(boolean done, String todo, int listId) {
+//        try {
+//            Statement stmt = conn.createStatement();
+//
+//            //execute() is for insert, update or delete
+//            String newQuote = "INSERT INTO " + tableName + " VALUES (null,'" + body + "'";
+//            if (!tableName.equals("todos")) {
+//                newQuote += ", '" + other + "'";
+//            }
+//            newQuote += ")";
+//            System.out.println("body: " + body + "other: " + other);
+//            if (tableName == "todos") {
+//                String insertItem = "INSERT INTO " + "todoitems" + " VALUES (null, false,'" +
+//                        other + ", null";
+//            }
+//            System.out.println(newQuote);
+//            stmt.execute(newQuote);
+//        } catch (SQLException e) {
+//            throw new IllegalStateException(
+//                    "Error inserting quote: " + e.getMessage());
+//        }
     }
 }

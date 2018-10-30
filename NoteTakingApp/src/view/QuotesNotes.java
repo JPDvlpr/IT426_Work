@@ -8,10 +8,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 
-public class QuotesNotes extends MenuUI {
+public class QuotesNotes {
 
     private Notes note = new Notes();
     public GridPane grid = new GridPane();
@@ -25,14 +27,14 @@ public class QuotesNotes extends MenuUI {
     private final int BUTTON_PADDING = 10;
     private NoteAppController controller = new NoteAppController();
 
-    public void start(Stage stage) {
-        note.start(stage);
-        Scene scene = getScene();
-        scene.getStylesheets().add("styles/styles.css");
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("Quote Note");
-    }
+//    public void start(Stage stage) {
+//        note.start(stage);
+//        Scene scene = getScene();
+//        scene.getStylesheets().add("styles/styles.css");
+//        stage.setScene(scene);
+//        stage.show();
+//        stage.setTitle("Quote Note");
+//    }
 
     public void gridLayout() {
         note.gridLayout();
@@ -44,8 +46,11 @@ public class QuotesNotes extends MenuUI {
         grid.setPadding(new Insets(BUTTON_PADDING));
     }
 
-    public Scene getScene() {
-
+    public Scene getScene(HBox defaultButtons) {
+    
+        VBox scene = new VBox(  );
+        scene.getChildren().add( defaultButtons );
+    
         gridLayout();
 
         TextField quote = new TextField();
@@ -70,7 +75,7 @@ public class QuotesNotes extends MenuUI {
         grid.add(author, 0, 1, NUM_COLS, ROWSPAN);
 
         grid.add(post, 0, 2, NUM_COLS, ROWSPAN);
-
-        return new Scene(grid, WIN_WIDTH, WIN_HEIGHT);
+        scene.getChildren().add( grid );
+        return new Scene(scene, WIN_WIDTH, WIN_HEIGHT);
     }
 }

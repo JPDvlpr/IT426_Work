@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
 
-public class HyperlinkNotes extends Application
+public class HyperlinkNotes
 {
     private Notes note = new Notes();
     public GridPane grid = new GridPane();
@@ -27,14 +27,14 @@ public class HyperlinkNotes extends Application
     private NoteAppController controller = new NoteAppController();
 
 
-    public void start(Stage stage){
-        note.start(stage);
-        Scene scene = getScene();
-        scene.getStylesheets().add("styles/styles.css");
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("Hyperlink Note");
-    }
+//    public void start(Stage stage){
+//        note.start(stage);
+//        Scene scene = getScene();
+//        scene.getStylesheets().add("styles/styles.css");
+//        stage.setScene(scene);
+//        stage.show();
+//        stage.setTitle("Hyperlink Note");
+//    }
 
     public void gridLayout(){
         note.gridLayout();

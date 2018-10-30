@@ -19,6 +19,7 @@ import static javafx.geometry.Pos.BOTTOM_RIGHT;
 
 public class MenuUI extends Application
 {
+    
     public static final int WIN_SIZE = 300;
     public static final int DELAY = 3000;
     private static final int NUM_COLS = 10;
@@ -37,7 +38,7 @@ public class MenuUI extends Application
     private Label label;
     private HBox area;
     private Stage primaryStage;
-    private String[] headers = {"Quotes", "Hyperlink", "todolist", "codesnippets"};
+    private String[] headers = {"Quotes","Hyperlink","todolist","codesnippets"};
     private String[] bodies = {
             "quotes",
             "links",
@@ -48,92 +49,105 @@ public class MenuUI extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-        primaryStage.setTitle("NotesApp");
-        primaryStage.setScene(getIntroScene());
+        
+        primaryStage.setTitle( "NotesApp" );
+        primaryStage.setScene( getIntroScene( ) );
         primaryStage.show( );
         this.primaryStage = primaryStage;
-    
-        KeyFrame frame = new KeyFrame( Duration.millis(DELAY),
-                event -> primaryStage.setScene(getStoryScreen(0)));
-        Timeline animation = new Timeline(frame);
-        animation.play();
+
+//        KeyFrame frame = new KeyFrame( Duration.millis(DELAY),
+//                event -> primaryStage.setScene(getStoryScreen(0)));
+//        Timeline animation = new Timeline(frame);
+//        animation.play();
     }
     
     
     private Scene getStoryScreen(int i)
     {
-    //ADDED THIS METHOD AFTER KEYFRAME EVENT HANDLER ADDED TO START METHOD. NEEDS WORK,
-        VBox panel = new VBox();
+        //ADDED THIS METHOD AFTER KEYFRAME EVENT HANDLER ADDED TO START METHOD. NEEDS WORK,
+        VBox panel = new VBox( );
         Node elements = null;
-        panel.getChildren().addAll(elements);
-    
-        return new Scene(panel, WIN_SIZE, WIN_SIZE);
+        panel.getChildren( ).addAll( elements );
+        
+        return new Scene( panel,WIN_SIZE,WIN_SIZE );
     }
     
     private Scene getIntroScene()
     {
+        
         HBox panel = new HBox( );
         //panel.getChildren( ).addAll(buttons( ));
-        panel.getChildren().addAll(getNotesButtons());
-        Scene scene = new Scene(panel,WIDTH,HEIGHT);
+        panel.getChildren( ).addAll( getNotesButtons( ) );
+        Scene scene = new Scene( panel,WIDTH,HEIGHT );
+        
+        System.out.println( "intro scene" );
         
         return scene;
     }
     
+    //create something similar for rest type
     private Scene getNoteScene()
     {
-        HBox panel = new HBox( );
-        panel.getChildren( ).addAll(buttons( ));
-        panel.getChildren().addAll(getNotesButtons());
-        Scene scene = new Scene(panel,WIDTH,HEIGHT);
+        
+        HBox buttonPanel = new HBox( );
+        buttonPanel.getChildren( ).addAll( getNotesButtons( ) );
+//        Scene scene = new Scene(panel,WIDTH,HEIGHT);
+        QuotesNotes notes = new QuotesNotes( );
+        Scene scene = notes.getScene( buttonPanel );
+        
+        System.out.println( "testing note scene" );
         
         return scene;
     }
-    
     
     
     public Button[] getNotesButtons()
     {
-        char integer = 0;
-        Button[] notesButton = new Button[integer];
-        Button[] buttons = {new Button("Quote"), new Button("todo"), new Button("CodeSnippets"), new Button("Hyperlink")};
         
-        String[] buttonNames = {new String("quotenotes"), new String("codesnippetnotes"), new String("todonotes"), new String("hyperlinknotes")};
+        char integer = 0;
+        Button[] buttons = {new Button( "Quote" ),new Button( "todo" ),new Button( "CodeSnippets" ),new Button( "Hyperlink" )};
+        Button[] notesButton = new Button[buttons.length];
+        String[] buttonNames = {new String( "quotenotes" ),new String( "codesnippetnotes" ),new String( "todonotes" ),new String( "hyperlinknotes" )};
 //        for (int i = 0; i < integer; i++)
 //        {
 //            notesButton[i] = new Button(buttonNames[i]);
 //        }
-
 //        char integer1 = 0;
-        for (int i = 0; i < integer; i++)
+        for (int i = 0; i < buttons.length; i++)
         {
             String name = buttonNames[i];
-            notesButton[i].setOnAction(event ->
-                    primaryStage.setScene(getIntroScene()));
+            //figure out a way to get different scene to show depending on which buttons was pressed
+            buttons[i].setOnAction( event ->
+            {
+                System.out.println( "in event" );
+                primaryStage.setScene( getNoteScene( ) );
+            } );
             
         }
+        
         return buttons;
     }
     
     private GridPane buttons()
     {
-        GridPane grid = new GridPane( );
-        grid.setId("feature");
         
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(TOP_RIGHT_BOTTOM_LEFT));
+        GridPane grid = new GridPane( );
+        grid.setId( "feature" );
+        
+        grid.setHgap( 10 );
+        grid.setVgap( 10 );
+        grid.setPadding( new Insets( TOP_RIGHT_BOTTOM_LEFT ) );
         
         ObservableList <ColumnConstraints> cols = grid.getColumnConstraints( );
         for (int i = 0; i <= NUM_COLS; i++)
         {
-            cols.add(new ColumnConstraints(COL_WIDTH));
+            cols.add( new ColumnConstraints( COL_WIDTH ) );
         }
-        label = new Label("0");
-        area.setId("area");
-        area.getChildren( ).add(label);
-        area.setPrefHeight(BUTTON_WIDTH);
-        grid.add(area,0,5,NUM_COLS,1);
+        label = new Label( "0" );
+        area.setId( "area" );
+        area.getChildren( ).add( label );
+        area.setPrefHeight( BUTTON_WIDTH );
+        grid.add( area,0,5,NUM_COLS,1 );
         return grid;
     }
     

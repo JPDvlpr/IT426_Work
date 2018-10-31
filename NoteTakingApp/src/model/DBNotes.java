@@ -45,28 +45,31 @@ public class DBNotes implements INotesData {
     }
 
     public void addToDo(String title, String todo) {
+        int todoid;
         try {
             Statement stmt = conn.createStatement();
 
-            int todoid = stmt.getGeneratedKeys().getInt(1);
-            String newToDo = "INSERT INTO " + "todos" + " VALUES (" + todoid + ", '" + title + "'),";
-            String titleId = "SELECT id FROM todos WHERE title = " + title;
-
-            //int keyid = stmt.getGeneratedKeys().getInt(0);
-            String listItem = "INSERT INTO " + "todoitems" + " VALUES (" + 2 + ", " + false +
-                    ", '" + todo + "', " + todoid + ")";
+            todoid = stmt.getGeneratedKeys().getInt(1);
 
             System.out.println("todo id: " + todoid);
-            System.out.println("new todo: " + newToDo);
-            System.out.println("title id: " + titleId);
-            System.out.println("List item: " + listItem);
-            stmt.execute(newToDo);
-            //stmt.execute(titleId);
-            //stmt.execute(listItem);
+
         } catch (SQLException e) {
             throw new IllegalStateException(
                     "Error inserting quote: " + e.getMessage());
         }
+
+        try {
+            Statement stmt = conn.createStatement();
+
+            String listItem = "INSERT INTO " + "todoitems" + " VALUES (null, " + false +
+                    ", '" + todo + "', " + todoid + ")";
+
+            stmt.execute(listItem);
+        } catch (SQLException e) {
+            throw new IllegalStateException(
+                    "Error inserting quote: " + e.getMessage());
+        }
+
     }
 
     public void addToDoItems(boolean done, String todo, int listId) {

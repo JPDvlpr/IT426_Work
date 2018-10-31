@@ -49,8 +49,8 @@ public class ToDoNotes extends MenuUI {
 
     public Scene getScene(HBox defaultButtons) {
 
-        VBox scene = new VBox(  );
-        scene.getChildren().add( defaultButtons );
+        VBox scene = new VBox();
+        scene.getChildren().add(defaultButtons);
 
         gridLayout();
 
@@ -87,6 +87,8 @@ public class ToDoNotes extends MenuUI {
             }
         });
 
-        return new Scene(grid, WIN_WIDTH, WIN_HEIGHT);
+        scene.getChildren().add(grid);
+
+        return new Scene(scene, WIN_WIDTH, WIN_HEIGHT);
     }
 }

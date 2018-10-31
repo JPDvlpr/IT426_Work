@@ -4,6 +4,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,7 +15,6 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import static javafx.geometry.Pos.BOTTOM_RIGHT;
 
 
 public class MenuUI extends Application
@@ -38,12 +38,13 @@ public class MenuUI extends Application
     private Label label;
     private HBox area;
     private Stage primaryStage;
-    private String[] headers = {"Quotes","Hyperlink","todolist","codesnippets"};
+    private String[] headers = {"Quotes","Hyperlink","todolist","codesnippets", "Back"};
     private String[] bodies = {
             "quotes",
             "links",
             "todolist",
-            "Codesnips"
+            "Codesnips",
+            "Back"
     };
     
     @Override
@@ -59,6 +60,7 @@ public class MenuUI extends Application
 //                event -> primaryStage.setScene(getStoryScreen(0)));
 //        Timeline animation = new Timeline(frame);
 //        animation.play();
+    
     }
     
     
@@ -100,14 +102,30 @@ public class MenuUI extends Application
         return scene;
     }
     
+    //JUST ADDEDD THIS FOR HYPERLINK
+    private Scene getNewNoteScene()
+    {
+        
+        HBox buttonPanel = new HBox( );
+        buttonPanel.getChildren( ).addAll( getNotesButtons( ) );
+//        Scene scene = new Scene(panel,WIDTH,HEIGHT);
+        HyperlinkNotes notes = new HyperlinkNotes( );
+        Scene newscene = (Scene) notes.getScene( buttonPanel );
+        
+        System.out.println( "testing hyperlink" );
+        
+        return newscene;
+    }
+    
+    
     
     public Button[] getNotesButtons()
     {
         
         char integer = 0;
-        Button[] buttons = {new Button( "Quote" ),new Button( "todo" ),new Button( "CodeSnippets" ),new Button( "Hyperlink" )};
+        Button[] buttons = {new Button( "Quote" ),new Button( "todo" ),new Button( "CodeSnippets" ),new Button( "Hyperlink"), new Button( "Back" ) };
         Button[] notesButton = new Button[buttons.length];
-        String[] buttonNames = {new String( "quotenotes" ),new String( "codesnippetnotes" ),new String( "todonotes" ),new String( "hyperlinknotes" )};
+        String[] buttonNames = {new String( "quotenotes" ),new String( "codesnippetnotes" ),new String( "todonotes" ),new String( "hyperlinknotes" ), new String( "BACK" )};
 //        for (int i = 0; i < integer; i++)
 //        {
 //            notesButton[i] = new Button(buttonNames[i]);

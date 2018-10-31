@@ -39,12 +39,17 @@ public class Notes {
         grid.setGridLinesVisible(true);
     }
 
-    public Scene getScene(HBox defaultButtons)
+    public Scene getScene(HBox defaultButtons, HBox backButton)
     {
         VBox scene = new VBox(  );
         scene.getChildren().add( defaultButtons );
         gridLayout();
         grid.add( defaultButtons, 0,0, NUM_COLS,1);
+    
+        scene.getChildren().add( backButton );
+        gridLayout();
+        grid.add( backButton,0,0,NUM_COLS,1 );
+
         ObservableList<ColumnConstraints> cols = grid.getColumnConstraints();
         for (int i = 1; i <= NUM_COLS; i++) {
             cols.add(new ColumnConstraints(COL_WIDTH));

@@ -120,6 +120,18 @@ public class MenuUI extends Application {
 
         return newscene;
     }
+    
+    private Scene getCodesnippetScene() {
+        
+        HBox buttonPanel = new HBox();
+        buttonPanel.getChildren().addAll(getNotesButtons());
+//        Scene scene = new Scene(panel,WIDTH,HEIGHT);
+        CodeNotes notes = new CodeNotes();
+        Scene newscene = (Scene) notes.getScene(buttonPanel);
+        System.out.println("testing Codesnippet");
+        
+        return newscene;
+    }
 
 
     public Button[] getNotesButtons() {

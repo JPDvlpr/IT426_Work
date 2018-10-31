@@ -161,6 +161,10 @@ public class MenuUI extends Application {
                     case "todonotes":
                         primaryStage.setScene(getToDoScene());
                         break;
+                    case "codesnippetnotes":
+                        primaryStage.setScene(getCodesnippetScene());
+                        break;
+                        
                     default:
                         break;
 

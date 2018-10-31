@@ -45,22 +45,22 @@ public class CodeNotes
         scene.getChildren().add( buttonPanel );
         gridLayout();
     
-        TextField codeNotes = new TextField();
+        TextField codeSnippet = new TextField();
         
-        codeNotes.setStyle("-fx-font-family: 'monospaced';");
-        codeNotes.prefColumnCountProperty().bind(codeNotes.textProperty().length());
+        codeSnippet.setStyle("-fx-font-family: 'monospaced';");
+        codeSnippet.prefColumnCountProperty().bind(codeSnippet.textProperty().length());
     
-        codeNotes.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Code: " + newValue);
+        codeSnippet.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("CodeSnippet: " + newValue);
         });
     
-        TextField codesnippet = new TextField();
-        codeNotes.setFont( Font.font("Helvetica", FontPosture.ITALIC, 14));
-        codeNotes.setMaxHeight(BUTTON_WIDTH);
-        codeNotes.setId("codesnippet");
+        TextField codeNote = new TextField();
+        codeNote.setFont( Font.font("Helvetica", FontPosture.ITALIC, 14));
+        codeNote.setMaxHeight(BUTTON_WIDTH);
+        codeNote.setId("codenote");
     
-        codeNotes.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("CodeSnippet: " + newValue);
+        codeNote.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Code: " + newValue);
         });
     
         Button post = new Button("Post");
@@ -68,12 +68,12 @@ public class CodeNotes
         post.setId("post");
     
         post.setOnAction(event -> {
-            controller.handleNewNote("codeSnippet", codeNotes.getText(), codeNotes.getText());
+            controller.handleNewNote("codeSnippet", codeNote.getText(), codeNote.getText());
         });
     
-        grid.add(codeNotes, 0, NUM_COLS);
+        grid.add(codeSnippet, 0,0, NUM_COLS,1);
     
-        grid.add(codeNotes, 0, 1, NUM_COLS, 1);
+        grid.add(codeNote, 0, 1, NUM_COLS, 1);
     
         grid.add(post, 0, 2, NUM_COLS, 1);
     

@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.stage.Stage;
@@ -48,6 +49,9 @@ public class HyperlinkNotes
     }
 
     public Scene getScene(HBox buttonPanel) {
+    
+        VBox scene = new VBox(  );
+        scene.getChildren().add( buttonPanel );
 
         gridLayout();
 
@@ -76,13 +80,16 @@ public class HyperlinkNotes
         post.setOnAction(event -> {
             controller.handleNewNote("hyperlink", hyperlinkName.getText(), hyperlink.getText());
         });
-
+        
         grid.add(hyperlinkName, 0, ROW_INDEX, NUM_COLS, ROWSPAN);
 
         grid.add(hyperlink, 0, 1, NUM_COLS, ROWSPAN);
 
         grid.add(post, 0, 2, NUM_COLS, ROWSPAN);
-
-        return new Scene(grid, WIN_WIDTH, WIN_HEIGHT);
+    
+        scene.getChildren().add( grid );
+    
+    
+        return new Scene(scene, WIN_WIDTH, WIN_HEIGHT);
     }
 }

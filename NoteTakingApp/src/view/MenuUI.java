@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
-
 public class MenuUI extends Application
 {
     
@@ -38,7 +37,7 @@ public class MenuUI extends Application
     private Label label;
     private HBox area;
     private Stage primaryStage;
-    private String[] headers = {"Quotes","Hyperlink","todolist","codesnippets", "Back"};
+    private String[] headers = {"Quotes","Hyperlink","todolist","codesnippets","Back"};
     private String[] bodies = {
             "quotes",
             "links",
@@ -111,21 +110,19 @@ public class MenuUI extends Application
 //        Scene scene = new Scene(panel,WIDTH,HEIGHT);
         HyperlinkNotes notes = new HyperlinkNotes( );
         Scene newscene = (Scene) notes.getScene( buttonPanel );
-        
         System.out.println( "testing hyperlink" );
         
         return newscene;
     }
     
     
-    
     public Button[] getNotesButtons()
     {
         
         char integer = 0;
-        Button[] buttons = {new Button( "Quote" ),new Button( "todo" ),new Button( "CodeSnippets" ),new Button( "Hyperlink"), new Button( "Back" ) };
+        Button[] buttons = {new Button( "Quote" ),new Button( "todo" ),new Button( "CodeSnippets" ),new Button( "Hyperlink" ),new Button( "Back" )};
         Button[] notesButton = new Button[buttons.length];
-        String[] buttonNames = {new String( "quotenotes" ),new String( "codesnippetnotes" ),new String( "todonotes" ),new String( "hyperlinknotes" ), new String( "BACK" )};
+        String[] buttonNames = {new String( "quotenotes" ),new String( "todonotes" ),new String( "codesnippetnotes" ),new String( "hyperlinknotes" ),new String( "BACK" )};
 //        for (int i = 0; i < integer; i++)
 //        {
 //            notesButton[i] = new Button(buttonNames[i]);
@@ -138,7 +135,15 @@ public class MenuUI extends Application
             buttons[i].setOnAction( event ->
             {
                 System.out.println( "in event" );
-                primaryStage.setScene( getNoteScene( ) );
+                switch (name)
+                {
+                    case "quotenotes":
+                        primaryStage.setScene( getNoteScene( ) );
+                        break;
+                    case "hyperlinknotes":
+                        primaryStage.setScene( getNewNoteScene( ) );
+                        break;
+                }
             } );
             
         }

@@ -14,6 +14,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 
+/**
+ * Code notes is one option of notes the user
+ * can choose from to create
+ */
 public class CodeNotes
 {
     private Notes note = new Notes();
@@ -26,7 +30,6 @@ public class CodeNotes
     private final double BUTTON_WIDTH = 40;
     private NoteAppController controller = new NoteAppController();
 
-
     public void gridLayout()
     {
         note.gridLayout();
@@ -36,9 +39,15 @@ public class CodeNotes
         grid.setHgap(BUTTON_PADDING);
         grid.setVgap(BUTTON_PADDING);
         grid.setPadding(new Insets(BUTTON_PADDING));
-   
     }
-    
+
+    /**
+     * scene that has code snippet and when user adds
+     * the snippet gets added to db. The user has the option
+     * to view all of their to-dos
+     * @param buttonPanel
+     * @return
+     */
     public Scene getScene(HBox buttonPanel)
     {
         VBox scene = new VBox(  );
@@ -80,6 +89,5 @@ public class CodeNotes
         scene.getChildren().add( grid );
     
         return new Scene(scene, WIN_WIDTH, WIN_HEIGHT);
- 
     }
 }

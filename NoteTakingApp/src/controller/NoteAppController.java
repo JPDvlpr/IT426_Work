@@ -49,6 +49,18 @@ public class NoteAppController {
         return false;
     }
 
+    public boolean handleSelectNote(String type, String body, String other) {
+        switch (type) {
+            case "quote":
+                if (isEmpty(body) || isEmpty(other)) {
+                    return false;
+                }
+                model.viewNotes("quotes", body, other);
+                return true;
+        }
+        return false;
+    }
+
     private boolean isEmpty(String value) {
         return value == null || value.equals("");
     }

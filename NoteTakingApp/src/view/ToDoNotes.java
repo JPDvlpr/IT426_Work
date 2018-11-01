@@ -4,16 +4,15 @@ import controller.NoteAppController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.stage.Stage;
 
+/**
+ * To-do notes is one option of notes the user
+ * can choose from to create
+ */
 public class ToDoNotes extends MenuUI {
 
     private Notes note = new Notes();
@@ -28,25 +27,27 @@ public class ToDoNotes extends MenuUI {
     private final int BUTTON_PADDING = 10;
     private NoteAppController controller = new NoteAppController();
 
-//    public void start(Stage stage) {
-//        note.start(stage);
-//        Scene scene = getScene();
-//        scene.getStylesheets().add("styles/styles.css");
-//        stage.setScene(scene);
-//        stage.show();
-//        stage.setTitle("To-Do List ");
-//    }
-
+    /**
+     * Sets up a grid with the spacing and alignment
+     */
     public void gridLayout() {
         note.gridLayout();
         grid.setAlignment(Pos.TOP_CENTER);
-        grid.setGridLinesVisible(true);
+        //grid.setGridLinesVisible(true);
         grid.setId("grid");
         grid.setHgap(BUTTON_PADDING);
         grid.setVgap(BUTTON_PADDING);
         grid.setPadding(new Insets(BUTTON_PADDING));
     }
 
+    /**
+     * scene that has title and to-do when user adds
+     * textbox fields get added to do and todos get
+     * appened to the grid. The user has the option
+     * to view all of their to-dos
+     * @param defaultButtons
+     * @return
+     */
     public Scene getScene(HBox defaultButtons) {
 
         VBox scene = new VBox();

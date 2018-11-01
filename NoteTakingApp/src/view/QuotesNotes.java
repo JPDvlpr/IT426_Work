@@ -1,18 +1,23 @@
 package view;
 
 import controller.NoteAppController;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.*;
-import javafx.stage.Stage;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import model.DBNotes;
 
+/**
+ * quotes notes is one option of notes the user
+ * can choose from to create
+ */
 public class QuotesNotes {
 
     private Notes note = new Notes();
@@ -27,15 +32,6 @@ public class QuotesNotes {
     private final int BUTTON_PADDING = 10;
     private NoteAppController controller = new NoteAppController();
 
-//    public void start(Stage stage) {
-//        note.start(stage);
-//        Scene scene = getScene();
-//        scene.getStylesheets().add("styles/styles.css");
-//        stage.setScene(scene);
-//        stage.show();
-//        stage.setTitle("Quote Note");
-//    }
-
     public void gridLayout() {
         note.gridLayout();
         grid.setAlignment(Pos.CENTER);
@@ -46,6 +42,13 @@ public class QuotesNotes {
         grid.setPadding(new Insets(BUTTON_PADDING));
     }
 
+    /**
+     * scene that has quote and author when user adds
+     * the quote gets saved to db. The user has the
+     * option to view all of their quotes
+     * @param defaultButtons
+     * @return
+     */
     public Scene getScene(HBox defaultButtons) {
     
         VBox scene = new VBox(  );
@@ -70,11 +73,34 @@ public class QuotesNotes {
             controller.handleNewNote("quote", quote.getText(), author.getText());
         });
 
+        Button view = new Button("View Quotes");
+        post.setMaxHeight(BUTTON_WIDTH);
+        post.setId("view");
+
+        DBNotes note = new DBNotes();
+
+        VBox vbox = new VBox();
+
+        view.setOnAction(event -> {
+            //vbox.getChildren().add(note.viewNotes("quotes", ));
+            //for (int i = 0; i < 20; i++) {
+            //I want to show all database results from viewNotes function
+            //grid.add(note.viewNotes("quotes","",""), 0, 5, NUM_COLS, ROWSPAN);
+            //}
+        });
+
+        ScrollPane scrollPane = new ScrollPane(vbox);
+        scrollPane.setFitToWidth(true);
+
+
         grid.add(quote, 0, ROW_INDEX, NUM_COLS, ROWSPAN);
 
         grid.add(author, 0, 1, NUM_COLS, ROWSPAN);
 
         grid.add(post, 0, 2, NUM_COLS, ROWSPAN);
+
+        grid.add(scrollPane, 0, 4, NUM_COLS, ROWSPAN);
+
         scene.getChildren().add( grid );
         return new Scene(scene, WIN_WIDTH, WIN_HEIGHT);
     }

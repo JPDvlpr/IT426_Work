@@ -27,14 +27,14 @@ public class DBNotes implements INotesData {
             Statement stmt = conn.createStatement();
 
             //execute() is for insert, update or delete
-            String newQuote = "INSERT INTO " + tableName + " VALUES (null,'" + body + "'";
+            String newNote = "INSERT INTO " + tableName + " VALUES (null,'" + body + "'";
             if (!tableName.equals("todos")) {
-                newQuote += ", '" + other + "'";
+                newNote += ", '" + other + "'";
             }
-            newQuote += ")";
+            newNote += ")";
             System.out.println("body: " + body + "other: " + other);
 
-            stmt.execute(newQuote);
+            stmt.execute(newNote);
             if (tableName.equals("todos")) {
                 addToDo(body, other);
             }
@@ -72,26 +72,20 @@ public class DBNotes implements INotesData {
 
     }
 
-    public void addToDoItems(boolean done, String todo, int listId) {
-//        try {
-//            Statement stmt = conn.createStatement();
-//
-//            //execute() is for insert, update or delete
-//            String newQuote = "INSERT INTO " + tableName + " VALUES (null,'" + body + "'";
-//            if (!tableName.equals("todos")) {
-//                newQuote += ", '" + other + "'";
-//            }
-//            newQuote += ")";
-//            System.out.println("body: " + body + "other: " + other);
-//            if (tableName == "todos") {
-//                String insertItem = "INSERT INTO " + "todoitems" + " VALUES (null, false,'" +
-//                        other + ", null";
-//            }
-//            System.out.println(newQuote);
-//            stmt.execute(newQuote);
-//        } catch (SQLException e) {
-//            throw new IllegalStateException(
-//                    "Error inserting quote: " + e.getMessage());
-//        }
+    public String viewNotes(String tableName, String body, String other) {
+        try {
+            Statement stmt = conn.createStatement();
+
+            String selectedQuote = "SELECT * FROM quotes";
+
+            //System.out.println("body: " + body + "other: " + other);
+
+            stmt.execute(selectedQuote);
+
+        } catch (SQLException e) {
+            throw new IllegalStateException(
+                    "Error inserting quote: " + e.getMessage());
+        }
+        return body;
     }
 }

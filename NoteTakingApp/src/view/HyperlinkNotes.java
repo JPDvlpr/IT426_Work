@@ -1,7 +1,6 @@
 package view;
 
 import controller.NoteAppController;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,8 +11,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
-import javafx.stage.Stage;
 
+/**
+ * Hyperlink notes is one option of notes the user
+ * can choose from to create
+ */
 public class HyperlinkNotes
 {
     private Notes note = new Notes();
@@ -27,16 +29,6 @@ public class HyperlinkNotes
     private final double BUTTON_WIDTH = 40;
     private final int BUTTON_PADDING = 10;
     private NoteAppController controller = new NoteAppController();
-
-
-//    public void start(Stage stage){
-//        note.start(stage);
-//        Scene scene = getScene();
-//        scene.getStylesheets().add("styles/styles.css");
-//        stage.setScene(scene);
-//        stage.show();
-//        stage.setTitle("Hyperlink Note");
-//    }
 
     public void gridLayout(){
         note.gridLayout();
@@ -88,7 +80,6 @@ public class HyperlinkNotes
         grid.add(post, 0, 2, NUM_COLS, ROWSPAN);
     
         scene.getChildren().add( grid );
-    
     
         return new Scene(scene, WIN_WIDTH, WIN_HEIGHT);
     }

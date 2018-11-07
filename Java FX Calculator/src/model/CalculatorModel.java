@@ -24,7 +24,7 @@ public class CalculatorModel {
      * @param operator operation for first and second number
      * @return return the operation
      */
-    private long calculate(long calcNumb1, long calcNumb2, String operator) {
+    public long calculate(long calcNumb1, long calcNumb2, String operator) {
         switch (operator) {
             case "+":
                 return calcNumb1 + calcNumb2;
@@ -54,24 +54,20 @@ public class CalculatorModel {
             savedCalcInput = "";
             operatorInput = "";
         } else if (operators.contains(input)) {
-            switch (operatorInput) {
-                case "":
-                    operatorInput = input;
-                    savedCalcInput = currentCalcInput;
-                    currentCalcInput = "";
-                    break;
-                case "Enter":
-                    operatorInput = input;
-                    currentCalcInput = "";
-                    break;
-                default:
-                    savedCalcInput = "" + calculate(Integer.parseInt(savedCalcInput),
-                            Integer.parseInt(currentCalcInput), operatorInput);
-                    operatorInput = input;
-                    currentCalcInput = "";
-                    break;
+            if (operatorInput.equals("")) {
+                operatorInput = input;
+                savedCalcInput = currentCalcInput;
+                currentCalcInput = "";
+            } else if (operatorInput.equals("Enter")) {
+                operatorInput = input;
+                currentCalcInput = "";
+            } else {
+                savedCalcInput = "" + calculate(Integer.parseInt(savedCalcInput),
+                        Integer.parseInt(currentCalcInput), operatorInput);
+                operatorInput = input;
+                currentCalcInput = "";
             }
-        } else if (currentCalcInput.equals("")) {
+        } else if (currentCalcInput == "" || currentCalcInput == null) {
             currentCalcInput = input;
         } else {
             currentCalcInput += input;

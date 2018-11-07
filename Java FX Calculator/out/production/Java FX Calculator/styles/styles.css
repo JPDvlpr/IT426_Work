@@ -1,0 +1,19 @@
+Button {
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(229, 225, 225);
+    -fx-background-color: #fffcf9;
+    -fx-border-radius: 2px;
+    -fx-background-color: linear-gradient(to top, #7a84b5, #517ca9);
+
+}
+
+#grid{
+    -fx-background-color: linear-gradient(to bottom, #a9b8ff, #5b97cc);
+}
+
+TextArea{
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(188, 184, 184);
+    -fx-background-color: #fffcf9;
+    -fx-border-radius: 2px;
+}
